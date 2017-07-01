@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include <string.h>
 struct GPS{
     char time[20];
@@ -105,7 +106,7 @@ int main()
         printf("打开数据文件错误!\n");
         return 0;
     }
-    fw = fopen("C:\\Users\\18444\\Desktop\\ProcessingData\\Output.csv","a+");
+    fw = fopen("C:\\Users\\18444\\Desktop\\ProcessingData\\Output.csv","w+");
     if(fw==NULL)
     {
         printf("打开写入文件错误!\n");
@@ -125,7 +126,7 @@ int main()
 //        printf("日期:%s\n时间:%s\n经度:%s%c\n维度:%s%c\n海拔:%s\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt);
         if(i==0||i==40)
         {
-            fprintf(fw,"日期（年月日）,时间（时分秒）,经度（度分秒),纬度（度分秒),海拔（米）,车速（千米\小时）\n");
+            fprintf(fw,"日期（年月日）,时间（时分秒）,经度（度分秒),纬度（度分秒),海拔（米）,车速（千米\\小时）\n");
 //            printf("日期（年\月\日）,时间（时\分\秒）,经度,纬度,海拔（米）\n");
             i=0;
         }
@@ -145,7 +146,7 @@ int main()
 //        printf("%s\n",temp->date);
 //        printf("%s\n",temp->hingt);
 //        printf("%s%c\n",temp->latd,temp->latdx);
-        fprintf(fw,"%s,%s,%s%c,%s%c,%s,%.3lf\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt,s.carv);
+        fprintf(fw,"20%s,%s,%s%c,%s%c,%s,%.3lf\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt,s.carv);
 //        int l=strlen(s.lotd);
 //        printf("长度：%d\t%s\n%c",l,s.lotd,s.lotdx);
         printf("日期:%s\n时间:%s\n经度:%s'%c\n纬度:%s'%c\n海拔:%s米\n车速:%.3lf千米\\小时\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt,s.carv);
