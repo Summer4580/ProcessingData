@@ -12,6 +12,7 @@ struct GPS{
     char hingt[20];
     double carv;
     char Count[5];
+    char land[20];
 };
 void GPRMC(char a[],struct GPS *Temp)
 {
@@ -40,6 +41,12 @@ void GPRMC(char a[],struct GPS *Temp)
     {
         Temp->time[j] = a[i];
 //        printf("%c",a[i]);
+        i++,j++;
+    }
+    i=45,j=0;
+        while(a[i]!=',')
+    {
+        Temp->land[j] = a[i];
         i++,j++;
     }
     i=16,j=0;
@@ -133,7 +140,7 @@ int main()
 //        printf("日期:%s\n时间:%s\n经度:%s%c\n维度:%s%c\n海拔:%s\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt);
         if(i==0||i==40)
         {
-            fprintf(fw,"日期（年月日）,时间（时分秒）,经度（度分秒),纬度（度分秒),海拔（米）,车速（千米\\小时）,卫星数量\n");
+            fprintf(fw,"日期（年月日）,时间（时分秒）,经度（度分秒),纬度（度分秒),海拔（米）,车速（千米\\小时）,卫星数量,地面航向\n");
 //            printf("日期（年\月\日）,时间（时\分\秒）,经度,纬度,海拔（米）\n");
             i=0;
         }
@@ -153,10 +160,10 @@ int main()
 //        printf("%s\n",temp->date);
 //        printf("%s\n",temp->hingt);
 //        printf("%s%c\n",temp->latd,temp->latdx);
-        fprintf(fw,"20%s,%s,%s%c,%s%c,%s,%.3lf,%s\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt,s.carv,s.Count);
+        fprintf(fw,"20%s,%s,%s%c,%s%c,%s,%.3lf,%s,%s\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt,s.carv,s.Count,s.land);
 //        int l=strlen(s.lotd);
 //        printf("长度：%d\t%s\n%c",l,s.lotd,s.lotdx);
-        printf("日期:%s\n时间:%s\n经度:%s'%c\n纬度:%s'%c\n海拔:%s米\n车速:%.3lf千米\\小时\n卫星数量:%s\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt,s.carv,s.Count);
+        printf("日期:%s\n时间:%s\n经度:%s'%c\n纬度:%s'%c\n海拔:%s米\n车速:%.3lf千米\\小时\n卫星数量:%s\n地面航向:%s\n",s.date,s.time,s.lotd,s.lotdx,s.latd,s.latdx,s.hingt,s.carv,s.Count,s.land);
         i++;
     }
     fclose(fw);
